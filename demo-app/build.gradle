@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.4.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id 'maven-publish'
+	id 'war'
 }
 
 group = 'com.cognizant.demo'
@@ -10,15 +10,39 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+    compile group: 'org.springframework.boot', name: 'spring-boot', version: '2.2.4.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.2.4.RELEASE'
+	compile group: 'org.springframework', name: 'spring-web', version: '5.2.3.RELEASE'
+	
+	// https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+	providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+	
+	compile group: 'com.cognizant.demo', name: 'demo-domain', version: '0.0.1-SNAPSHOT'
+	compile group: 'com.cognizant.demo', name: 'demo-commons', version: '0.0.1-SNAPSHOT'
+	compile group: 'com.cognizant.demo', name: 'demo-integration', version: '0.0.1-SNAPSHOT'
+	compile group: 'com.cognizant.demo', name: 'demo-data', version: '0.0.1-SNAPSHOT'
+	compile group: 'com.cognizant.demo', name: 'demo-web', version: '0.0.1-SNAPSHOT'
+	
+	
+
 }
 
 test {
 	useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }

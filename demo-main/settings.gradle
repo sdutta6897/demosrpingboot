@@ -1,0 +1,10 @@
+rootProject.name = 'GradleMain'
+ 
+ 
+include   ':demo-domain',':demo-commons',':demo-data',':demo-integration',':demo-web',':demo-app' 
+project(':demo-domain').projectDir = new File(settingsDir, '../demo-domain')
+project(':demo-commons').projectDir = new File(settingsDir, '../demo-commons')
+project(':demo-data').projectDir = new File(settingsDir, '../demo-data')
+project(':demo-integration').projectDir = new File(settingsDir, '../demo-integration')
+project(':demo-web').projectDir = new File(settingsDir, '../demo-web')
+project(':demo-app').projectDir = new File(settingsDir, '../demo-app')
